@@ -19,8 +19,11 @@ OUTPUT = Path("/output/entry.txt")
 
 
 def main() -> None:
+    line = LINE.strip()
+    if not line or len(line) > 200:
+        raise SystemExit("entry must be one non-blank line of 1-200 characters")
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(LINE + "\n", encoding="utf-8")
+    OUTPUT.write_text(line + "\n", encoding="utf-8")
     OUTPUT.chmod(0o644)
 
 
